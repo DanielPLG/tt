@@ -1,0 +1,14 @@
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_app\usb_endp.c
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_lib.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_type.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_conf.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_regs.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_def.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_core.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_init.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_mem.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_int.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_desc.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_hwconfig.h
+.\obj\higher resolution\usb_endp.o: ..\USER\usb\usb_lib\inc\usb_istr.h
+.\obj\higher resolution\usb_endp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

@@ -1,0 +1,531 @@
+#ifndef   _MAIN_H
+#define   _MAIN_H
+#include <includes.h>
+//#define	AD7792    1
+#define CMD_STRING_SIZE       128
+//#define MASTER_RIGHT	 	
+#define	MAX_OF_DAC    4095
+#ifdef	AD7792
+#define	MAX_OF_ADC    65535
+#else
+#define	MAX_OF_ADC    4095
+#endif
+
+#define	DAC8812    1
+
+
+#define	LCDBACK_DELAY    60*30
+#define NUM_OF_DISP_BUF  16
+#define ApplicationAddress    0x8000000
+#define	firmwareAddress		  0x800143A
+#define OLDAddress		      0x8000000
+#define	IAP_ADDRESS			  0x4000
+#define NOT_IAP_ADDRESS	 0x0000
+#define PAGE_SIZE                         (0x400)    /* 2 Kbytes */
+#define FLASH_SIZE                        (0x20000)  /* 256 KBytes */
+#define ReverseFlgAddress    ((u32)0x2000bff0)	 //disp Reg ram
+#define ReverseVal  *(volatile uint16_t *)(ReverseFlgAddress)  
+#define PARA_ADDRESS       (ApplicationAddress+120*PAGE_SIZE)     
+#define PARA_ADDRESS_(n)  (ApplicationAddress+120*PAGE_SIZE+n*PAGE_SIZE)
+#define CAL_ADDRESS  (ApplicationAddress+126*PAGE_SIZE)
+#define Delault_Set_ADDRESS  (ApplicationAddress+127*PAGE_SIZE)
+#define Factory_Set_ADDRESS  (ApplicationAddress+119*PAGE_SIZE)
+#define KH1_scan   	 GPIO_ResetBits(GPIOD , GPIO_Pin_4);GPIO_SetBits(GPIOD , GPIO_Pin_3);GPIO_SetBits(GPIOD , GPIO_Pin_2);GPIO_SetBits(GPIOD , GPIO_Pin_1);
+#define KH2_scan   	 GPIO_ResetBits(GPIOD , GPIO_Pin_3);GPIO_SetBits(GPIOD , GPIO_Pin_4);GPIO_SetBits(GPIOD , GPIO_Pin_2);GPIO_SetBits(GPIOD , GPIO_Pin_1);
+#define KH3_scan   	 GPIO_ResetBits(GPIOD , GPIO_Pin_2);GPIO_SetBits(GPIOD , GPIO_Pin_4);GPIO_SetBits(GPIOD , GPIO_Pin_3);GPIO_SetBits(GPIOD , GPIO_Pin_1);
+#define KH4_scan   	 GPIO_ResetBits(GPIOD , GPIO_Pin_1);GPIO_SetBits(GPIOD , GPIO_Pin_4);GPIO_SetBits(GPIOD , GPIO_Pin_3);GPIO_SetBits(GPIOD , GPIO_Pin_2);
+#define KH5_scan   	;
+#define ReadKA  GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_0)
+#define ReadKB  GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_12)
+
+#define ReadKC  GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_11)
+#define ReadKD  GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_10)
+
+#define ReadKV1  GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_7)
+#define ReadKV2  GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_6)
+#define ReadKV3  GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_5)
+//#define ReadKV4  GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5)
+#define ReadCC_CH1  GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_10)
+#define ReadCC_CH2  GPIO_ReadInputDataBit(GPIOE, GPIO_Pin_3)
+
+#define ReadCC_OTP  GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_15)
+#define USB_Check  GPIO_ReadInputDataBit(GPIOE, GPIO_Pin_2)
+#define JOY_UP       GPIO_Pin_4  /* PD.4 */
+#define JOY_DOWN     GPIO_Pin_1  /* PD.1 */
+#define JOY_SEL      GPIO_Pin_0  /* PD.1 */
+#define JOY_LEFT     GPIO_Pin_2  /* PD.2 */
+#define JOY_RIGHT    GPIO_Pin_3  /* PD.3 */
+#define JOY_LEFT_BUTTON    GPIO_Pin_13  /* PC.13 */
+#define JOY_RIGHT_BUTTON    GPIO_Pin_8  /* PA.8 */
+#define JOY_MID_BUTTON    GPIO_Pin_0 /* PA.8 */
+#define CURSOR_STEP     5
+/*
+#define color_back      0xd0d0d0
+#define color_back0      0x404040
+#define color_test      0x707070
+#define color_ch1      0xf2a400 
+#define color_ch2      0x2f97ff	  */
+#define color_store_button  0xffffff
+//#define color_timer_chart   0xd0a2ff
+#ifdef CH1_RIGHT
+#define CH1_CHOICE  2
+#define CH2_CHOICE  1 
+#define	CH1        "CH2"
+#define	CH2        "CH1"
+#define CH1_VOLT_SET_CAL  0
+#define CH1_VOLT_DISP_CAL  1
+#define CH1_CURR_SET_CAL  2
+#define CH1_CURR_DISP_CAL  3
+#define CH2_VOLT_SET_CAL  4
+#define CH2_VOLT_DISP_CAL  5
+#define CH2_CURR_SET_CAL  6
+#define CH2_CURR_DISP_CAL  7
+#else
+#define CH1_CHOICE  1
+#define CH2_CHOICE  2 
+#define	CH1        "CH1"
+#define	CH2        "CH2"
+#define CH1_VOLT_SET_CAL  0
+#define CH1_VOLT_DISP_CAL  1
+#define CH1_CURR_SET_CAL  2
+#define CH1_CURR_DISP_CAL  3
+#define CH2_VOLT_SET_CAL  4
+#define CH2_VOLT_DISP_CAL  5
+#define CH2_CURR_SET_CAL  6
+#define CH2_CURR_DISP_CAL  7
+#endif
+
+#define	LED_BIT0         (1<<0 )
+#define	LED_BIT1         (1<<1)
+#define	LED_BIT2       (1<<2)
+#define	LED_BIT3         (1<<3)
+#define	LED_BIT4        (1<<4)
+#define	LED_BIT5        (1<<5)
+#define	LED_BIT6       (1<<6)
+#define	LED_BIT7       (1<<7)
+
+#define	LED_WAVE         (1<<0 )
+#define	LED_PARA         (1<<1)
+#define	LED_STORE        (1<<2)
+#define	LED_SER          (1<<3)
+#define	LED_TIMER        (1<<4)
+#define	LED_LOCK         (1<<5)
+#define	LED_ALL_ON       (1<<6)
+#define	LED_CH1_ON       (1<<7)
+#define	LED_CH2_ON       (1<<8)
+#define	LED_CH3_ON       (1<<9)
+#define	LED_FINE         (1<<10)
+#define	DELAY_PARA        (1<<0)
+#define	DELAY_PARA1      (1<<1)
+#define	DELAY_SER         (1<<6)
+#define BEEP_ON    GPIO_SetBits(GPIOE , GPIO_Pin_8);   
+#define BEEP_OFF  GPIO_ResetBits(GPIOE , GPIO_Pin_8); 
+#define USB_ENABLE GPIO_ResetBits(GPIOE , GPIO_Pin_1); 
+#define USB_DISABLE GPIO_SetBits(GPIOE , GPIO_Pin_1); 
+#define LCD_ON    GPIO_SetBits(GPIOE , GPIO_Pin_1);  
+#define LCD_OFF   GPIO_ResetBits(GPIOE , GPIO_Pin_1);
+#define LEDCH595_OFF    GPIO_SetBits(GPIOE , GPIO_Pin_0); 
+#define LEDCH595_ON    GPIO_ResetBits(GPIOE , GPIO_Pin_0); 
+#define CH595_OFF    GPIO_SetBits(GPIOD , GPIO_Pin_2); 
+#define CH595_ON    GPIO_ResetBits(GPIOD , GPIO_Pin_2);  
+#define CH1POWER_OFF    GPIO_SetBits(GPIOD , GPIO_Pin_9);
+#define CH1POWER_ON   GPIO_ResetBits(GPIOD , GPIO_Pin_9);  
+#define CH2POWER_OFF    GPIO_SetBits(GPIOE , GPIO_Pin_4);
+#define CH2POWER_ON   GPIO_ResetBits(GPIOE , GPIO_Pin_4);
+#define CH3POWER_OFF    GPIO_SetBits(GPIOB , GPIO_Pin_0);
+#define CH3POWER_ON   GPIO_ResetBits(GPIOB , GPIO_Pin_0); 
+
+#define CH3POWER_1v8_OFF    GPIO_ResetBits(GPIOC , GPIO_Pin_5);
+#define CH3POWER_1v8_ON   GPIO_SetBits(GPIOC , GPIO_Pin_5);
+#define CH3POWER_2v5_OFF    GPIO_ResetBits(GPIOB , GPIO_Pin_0);
+#define CH3POWER_2v5_ON   GPIO_SetBits(GPIOB , GPIO_Pin_0);
+#define CH3POWER_3v3_OFF    GPIO_ResetBits(GPIOB , GPIO_Pin_1);
+#define CH3POWER_3v3_ON   GPIO_SetBits(GPIOB , GPIO_Pin_1);
+#define CH3POWER_5v0_OFF    GPIO_ResetBits(GPIOE , GPIO_Pin_7);
+#define CH3POWER_5v0_ON   GPIO_SetBits(GPIOE , GPIO_Pin_7);
+
+#define	DELAY_SER_ON     GPIO_SetBits(GPIOE, GPIO_Pin_13);
+#define	DELAY_SER_OFF   GPIO_ResetBits(GPIOE , GPIO_Pin_13);
+
+#define	DELAY_PARA_ON     GPIO_SetBits(GPIOE, GPIO_Pin_14);
+#define	DELAY_PARA_OFF   GPIO_ResetBits(GPIOE , GPIO_Pin_14);
+
+#define	DELAY_PARA1_ON     GPIO_SetBits(GPIOE, GPIO_Pin_15);
+#define	DELAY_PARA1_OFF   GPIO_ResetBits(GPIOE , GPIO_Pin_15);
+
+#define	DELAY_PARA2_ON     GPIO_SetBits(GPIOE, GPIO_Pin_12);
+#define	DELAY_PARA2_OFF   GPIO_ResetBits(GPIOE , GPIO_Pin_12);
+
+#define LED_CH1_CV_ON    GPIO_SetBits(GPIOE , GPIO_Pin_10); GPIO_ResetBits(GPIOC , GPIO_Pin_4);
+#define LED_CH1_CV_OFF    GPIO_ResetBits(GPIOE , GPIO_Pin_10); GPIO_ResetBits(GPIOC , GPIO_Pin_4);
+#define LED_CH1_CC_ON    GPIO_SetBits(GPIOC , GPIO_Pin_4); GPIO_ResetBits(GPIOE , GPIO_Pin_10);
+#define LED_CH1_CC_OFF    GPIO_ResetBits(GPIOC , GPIO_Pin_4); GPIO_ResetBits(GPIOE , GPIO_Pin_10);
+#define  LED_CH2_CC_ON    GPIO_SetBits(GPIOE , GPIO_Pin_9); GPIO_ResetBits(GPIOB , GPIO_Pin_10);
+#define  LED_CH2_CC_OFF    GPIO_ResetBits(GPIOE , GPIO_Pin_9); GPIO_ResetBits(GPIOB , GPIO_Pin_10);
+#define  LED_CH2_CV_ON   GPIO_SetBits(GPIOB , GPIO_Pin_10); GPIO_ResetBits(GPIOE , GPIO_Pin_9);
+#define  LED_CH2_CV_OFF   GPIO_ResetBits(GPIOB , GPIO_Pin_10); GPIO_ResetBits(GPIOE , GPIO_Pin_9);
+#define LED_SER_CH1(x)	x ? GPIO_SetBits(GPIOC,GPIO_Pin_9): GPIO_ResetBits(GPIOC,GPIO_Pin_9)
+#define LED_PARA_CH2(x)	x ? GPIO_SetBits(GPIOC,GPIO_Pin_8): GPIO_ResetBits(GPIOC,GPIO_Pin_8)
+#define LED_CH3_1V8(x)	x ? GPIO_SetBits(GPIOB,GPIO_Pin_5): GPIO_ResetBits(GPIOB,GPIO_Pin_5)
+#define LED_CH3_2V5(x)	x ? GPIO_SetBits(GPIOA,GPIO_Pin_10): GPIO_ResetBits(GPIOA,GPIO_Pin_10)
+#define LED_CH3_3V3(x)	x ? GPIO_SetBits(GPIOA,GPIO_Pin_9): GPIO_ResetBits(GPIOA,GPIO_Pin_9)
+#define LED_CH3_5V0(x)	x ? GPIO_SetBits(GPIOA,GPIO_Pin_8): GPIO_ResetBits(GPIOA,GPIO_Pin_8)
+#define LED1_LOCK(x)	x ? GPIO_SetBits(GPIOC,GPIO_Pin_7): GPIO_ResetBits(GPIOC,GPIO_Pin_7)
+#define LED_SETVIEW(x)	x ? GPIO_SetBits(GPIOC,GPIO_Pin_6): GPIO_ResetBits(GPIOC,GPIO_Pin_6)
+#define LED_BEEPER(x)	x ? GPIO_SetBits(GPIOD,GPIO_Pin_15): GPIO_ResetBits(GPIOD,GPIO_Pin_15)
+#define LED_ON_OFF(x)	x ? GPIO_SetBits(GPIOD,GPIO_Pin_14): GPIO_ResetBits(GPIOD,GPIO_Pin_14)
+#define LED_OVP(x)	x ? GPIO_SetBits(GPIOD,GPIO_Pin_13): GPIO_ResetBits(GPIOD,GPIO_Pin_13)
+#define LED_OCP(x)	x ? GPIO_SetBits(GPIOD,GPIO_Pin_12): GPIO_ResetBits(GPIOD,GPIO_Pin_12)
+#ifdef HIGHER_RESOLUTION
+#define Volt_xlocation	  35
+#define Curr_xlocation	  59
+#else
+#define Volt_xlocation	  45
+#define Curr_xlocation	  69
+#endif
+#define Volt_ylocation	  75
+
+#define Curr_ylocation	  130
+
+#ifdef HIGHER_RESOLUTION
+#define  Pow_xlocation	  85
+#define Pow_AT	  95
+#else
+#define Pow_AT	  80
+#define  Pow_xlocation	  83
+#endif
+#define Pow_ylocation	  185
+#define Wave_Volt_x	  25
+#define Wave_Volt_ylocation	  51
+#define Wave_Curr_x	  138
+#define Wave_Curr_ylocation	  51
+#define Wave_x_start	  26
+#define Wave_x_end	   210
+#define Wave_y_start  210
+#define Wave_y_end	  95
+#define Wave_long	  1
+#define Volt_max  32
+#define Volt_min  0
+#define Curr_max  3.2
+#define Curr_min  0
+#define Timer_cnt_max  10000
+#define X_CH2_OFFSET  238
+/* SysTick counter state */
+#define SysTick_Counter_Disable        ((u32)0xFFFFFFFE)
+#define SysTick_Counter_Enable         ((u32)0x00000001)
+#define SysTick_Counter_Clear          ((u32)0x00000000)
+#define store_file_choice  0
+#define store_operat_choice  1  
+#define timer_on  1
+#define timer_off 0 
+#define CH1_SEL 0 
+#define CH2_SEL 1
+#define CH_NONE_SEL 3
+#define CH1_ON 1 
+#define CH1_OFF 0
+#define CH2_ON 1 
+#define CH2_OFF 0
+#define VOLT_MAX 32
+#define CURR_MAX 3.2
+#define VOLT_MIN 0
+#define CURR_MIN 0
+#define CURR_chart_startx 28
+#define CURR_chart_starty 85
+#define CURR_chart_Endx 215
+#define CURR_chart_Endy 85
+#define VOLT_chart_startx 28
+#define VOLT_chart_starty 235
+#define VOLT_chart_Endx 215
+#define VOLT_chart_Endy 235
+#define TIMER_R 7
+#define time_set_x 375
+#define time_set_y 94
+#define long_set_x 58
+#define long_set_y 36
+#define CURR_SECTION_MIN 223
+#define CURR_SECTION_MAX 163
+#define VOLT_SECTION_MIN 157
+#define VOLT_SECTION_MAX 97
+#define SECTION_PIXE    60
+#ifdef HIGHER_RESOLUTION
+#define SHORT_BIT   5
+#define LONG_BIT    6
+#else
+#define SHORT_BIT   4
+#define LONG_BIT    5
+#endif
+typedef enum
+{
+ page_main = 1,
+ page_ovp_ocp=2,
+ page_calibration=3,
+ page_timer = 4,
+ page_store = 5	,
+ page_version=6,
+
+} MAIN_CUR;
+typedef enum
+{
+ 
+ main_location_volt=1,
+ main_location_curr=2,
+ main_location_cal=3,
+} MAIN_LOCATION_STAT;
+typedef enum
+{
+ timer_location_volt=1,
+ timer_location_curr=2,
+ timer_location_set=3,
+ timer_location_left=4, 
+} TIMER_LOCATION_STAT;
+typedef enum
+{
+ DOWN=1,
+ LEFT=2,
+ RIGHT=3,
+ UP=4,
+ KEY_CAL=5,
+ KEY_TIMER=6,
+ KEY_FINE=7,
+ KEY_OK=8,
+ KEY_UNLOCK=9,
+ KEY_PARA=10,
+ KEY_SER=11,
+ KEY_LOCK=15,
+ KEY_CH3=13,
+ KEY_CH1=14,
+ KEY_CH2=12,
+ KEY_CH1_ON=16,
+ KEY_CH2_ON=17,
+ KEY_ALL_ON=18,
+ KEY_SCPI=19,
+ KEY_VERSION=20,
+ KEY_FINE_CURRENT=21,
+ //KEY_FINE_VOLT=21,
+ KEY_SETVIEW=22,
+ KEY_OVP=23,
+ KEY_OCP=24,
+ KEY_BEEPER=25,
+ KEY_UP_CURRENT=26,
+ KEY_DOWN_CURRENT=27,
+ KEY_OVP_SET=28,
+ KEY_OCP_SET=29,
+ KEY_UNBEEPER=30,
+} KEY_VALUE;
+
+extern void DELAY_MS(int time);
+extern void Delay(__IO uint32_t nTime);
+extern void TimingDelay_Decrement(void);
+extern u8 ERR_Num,ERR_Flg;
+extern u8 cur_page;
+extern u8 SCPI_CH1_SET,SCPI_CH2_SET;
+extern u8 SCPI_WAVE2_SET;
+extern u8 SCPI_WAVE_SET;
+extern u8 CHAN_STAT;
+extern u8 CH1_STAT;
+extern u8 CH2_STAT;
+extern u8 rcl_inprogess;
+extern u8 SCPI_SER_FLG,SCPI_SER_SET;
+extern u8 SCPI_PARA_FLG,SCPI_PARA_SET;
+extern u8 store_info_flg;
+extern u8 main_info_flg;
+extern u8 info_stat;
+extern u8 VOLT_REFLESH;
+extern u8 CURR_REFLESH;
+extern float ch1_volt_disp,ch2_volt_disp ;
+extern float ch1_curr_disp,ch2_curr_disp ;
+extern float ch1_pow_disp,ch2_pow_disp ;
+extern float volt_step,curr_step;
+extern float ch1_volt_disp_cal,ch2_volt_disp_cal ;
+extern float ch1_curr_disp_cal,ch2_curr_disp_cal ;
+extern u8 disp_reflesh;
+extern u8 set_reflesh;
+extern u8 main_cur_location;
+extern u8 timer_cur_location;
+extern u8 timer_cur_back;
+extern u8 store_cur_location;
+extern  u8 CH1_SET_FLG,CH2_SET_FLG;
+extern u8 key_stat;
+extern u8 key_vale;
+extern u8 file_cur;
+extern u8 screen_reverse;
+extern u8 operate_cur;
+extern  u8 beep_on;
+extern u8 CH1Mode_flg,CH1Mode_reflesh;
+extern u8 CH2Mode_flg,CH2Mode_reflesh;
+extern u16 framebufer_shift;
+extern int g_BootTimes;
+extern u32 color_back,color_back0,color_test,color_ch1,color_ch2,color_timer_chart;
+extern const GUI_POINT BUTTON_Store[]  ;
+extern const GUI_POINT VM_Store3[];
+extern const GUI_POINT BUTTON[];
+extern const GUI_POINT Main_Sel[];
+extern const GUI_POINT INFO_BUTTON[];
+extern const GUI_POINT _aPointHexagon1[];
+extern const GUI_POINT _aPointHexagon5[];
+extern const  GUI_POINT VM_timer1[];
+extern const  GUI_POINT VM_timer2[];
+extern const  GUI_POINT VM_timer3[];
+extern const GUI_POINT Timer_Sel[]	;
+extern const GUI_POINT _aPointStar1[];
+extern GUI_POINT aEnlargedPoints[8];
+extern GUI_CONST_STORAGE GUI_BITMAP bmUSB ;
+extern GUI_CONST_STORAGE GUI_BITMAP bmLOGO  ;
+extern GUI_CONST_STORAGE GUI_BITMAP bmUSB1;
+extern GUI_CONST_STORAGE GUI_BITMAP bmlock1 ;
+extern GUI_CONST_STORAGE GUI_BITMAP bmlock5 ;
+extern GUI_CONST_STORAGE GUI_BITMAP bmTIMER ;
+extern  const GUI_FONT GUI_FontHZ_SimSun_48;
+extern  const GUI_FONT GUI_FontHZ_SimSun_37;
+typedef struct {
+u8 version_page_flg;
+u8 time_page_flg;
+u8 store_page_flg;
+u8 PARA_FLG;
+u8 SER_FLG;
+u8 OVP_SET_FLG;
+u8 OCP_SET_FLG;
+u8 OVP_ON_FLG;
+u8 OCP_ON_FLG;
+u8 chan_stat;
+u8 ch1_stat;
+u8 ch2_stat;
+u8 ch3_stat;
+u8 ALL_ON_FLG;
+u8 CAL_FLG;
+u8 step_flg;
+u8 step_current_flg;
+u8 SetView_FLG;
+u8 set_reflesh;
+u8 ovp_set_reflesh;
+u8 cal_set_reflesh;
+} KEY_STAT_FLG;
+typedef struct _CMD_INFO
+{
+char  * apParamStr[10];
+char  * apcommd[5];
+u8 COMMD_NUM;
+u8 PARA_NUM;
+u8 STAR_FLG;
+u8 CMD_FORM;
+u8  PARA_FLG;
+u8  IS_QUY; 
+
+}
+CMD,*P_CMD;
+typedef struct {
+  float Cal_X1, Cal_Y1;
+  float Cal_X2, Cal_Y2;
+} cal_data;
+typedef struct {
+ float a, b;
+} Cal_K;
+typedef struct _PARA_SET
+{
+u8    timer_flg;
+u8    STAT_flg;
+u8    DISP_MODE;
+
+int   tmr_set_step;
+int   tmr_set[5];
+int   tmr_left[5];
+float volt_set;
+float curr_set;
+float volt_ovp_set;
+float curr_ocp_set;
+float power_ocp_set;
+float Pow_set;
+//float tmr_volt[5];
+//float tmr_curr[5];
+float volt_set_step;
+float curr_set_step;
+float cal_volt_set;
+float cal_curr_set;
+float cal_volt_disp;
+float cal_curr_disp;
+}
+SET_PARA,*P_SET_PARA;
+typedef struct _PARA_STORE
+{
+u8    flg;
+//int   ch1_tmr_set[5];
+//int   ch1_tmr_left[5];
+float ch1_volt_set;
+float ch1_curr_set;
+//float ch1_tmr_volt[5];
+//float ch1_tmr_curr[5];
+//int   ch2_tmr_set[5];
+//int   ch2_tmr_left[5];
+float ch2_volt_set;
+float ch2_curr_set;
+//float ch2_tmr_volt[5];
+//float ch2_tmr_curr[5];
+u8   mode_flg;
+u8   ch3_Sel;
+//char SERIAL_NO[24];
+int  BootTimes;
+}
+STORE_PARA,*P_STORE_PARA;
+typedef struct _PARA_DISP
+{
+
+u16   VOLT_LOCATION_X;
+u16   VOLT_LOCATION_Y;
+u16   CURR_LOCATION_X;
+u16   CURR_LOCATION_Y;
+u16   TIMER_LOCATION_X;
+u16   TIMER_LOCATION_Y;
+float volt_disp;
+float curr_disp;
+float pow_disp;
+}
+DISP_PARA,*P_DISP_PARA;
+typedef struct _PARA_TIMER
+{
+u8   timer_start;
+u8   timer_next;
+u8   timer_div_num;
+u8   timer_flg;
+u8   timer_open;
+u8  timer_reflesh;
+u8  timer_count_stat;
+int timer_set_count;
+int sec_count;
+int milosec_count;
+int timer_count_set;
+}
+
+ 
+TIMER_PARA,*P_TIMER_PARA;
+extern TIMER_PARA TIMER_CH1,TIMER_CH2;
+extern P_TIMER_PARA	 pt_TIMER;
+extern DISP_PARA DISP_CH1,DISP_CH2;
+extern	P_DISP_PARA	 pt_DISP;
+
+extern SET_PARA CHAN1,CHAN2;
+extern STORE_PARA  para_store;
+extern P_STORE_PARA	 p_para_store;
+extern	P_SET_PARA	 pt_PARA;
+extern CMD SCPI; 
+extern KEY_STAT_FLG g_stat;
+extern cal_data Cal_Volt,Cal_VoltSet,Cal_Curr,Cal_CurrSet;
+extern Cal_K    K_Volt,K_Curr;
+extern Cal_K  PARA_K[10];
+extern STORE_PARA  para_factory;
+extern unsigned char  DsipBuffer[NUM_OF_DISP_BUF];
+void func_set(float value,u8 channel,u8 chan_stat );
+void ch2func_set(float value,u8 channel);
+void DISP_POWER(float val,u16 offset);
+void DISP_CURRENT_CAL_DISP(float val,u16 offset);
+Cal_K Cal_Test(cal_data val);
+extern void floattostr(char*buf,float tmp);
+extern void Volt_Disp(float value,u16 offset,u8 mode);
+extern void Curr_Disp(float value,u16 offset,u8 mode);
+//extern const SCPI_KEYWORD keywords[];
+
+#endif
+
+xtern const SCPI_KEYWORD keywords[];
+
+#endif
+

@@ -1,0 +1,12 @@
+---- ch3_volt_disp Matches (11 in 6 files) ----
+Main.h (USER) line 574 : extern float ch3_volt_disp;
+PAGE_OVP_MAIN in mainpage.c (USER) : 			ad_value=ch3_volt_disp;
+Main_Disp_reflesh in mainpage.c (USER) : 				ad_value=ch3_volt_disp;
+mainpage.h (USER) line 17 : float ch1_volt_disp,ch2_volt_disp,ch3_volt_disp ;
+CH3_MEAsure_VOLTage in SCPI.c (USER) : 				temp=ch3_volt_disp;
+MEAsure_VOLTage in SCPI.c (USER) : 			temp=ch3_volt_disp;
+MEAsure_VOLTage in SCPI.c (USER) : 				temp=ch3_volt_disp;
+CALibration_VOLTage in SCPI.c (USER) : 			Cal_Volt.Cal_X1=ch3_volt_disp;
+CALibration_VOLTage in SCPI.c (USER) : 			Cal_Volt.Cal_X2=ch3_volt_disp;
+CH3_Measure in uctsk_OSMeasure.c (USER\ucCos_App) : 	ch3_volt_disp=AD_Temp*PARA_K[CH3_VOLT_DISP_CAL].a+PARA_K[CH3_VOLT_DISP_CAL].b;
+uctsk_Disp in uctsk_Task.c (USER\ucCos_App) : 				ad_value=ch3_volt_disp;

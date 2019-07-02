@@ -1,0 +1,14 @@
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_app\usb_prop.c
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_lib.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_type.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_conf.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_regs.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_def.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_core.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_init.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_mem.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_int.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_prop.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_desc.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_pwr.h
+.\obj\higher resolution\usb_prop.o: ..\USER\usb\usb_lib\inc\usb_hwconfig.h
